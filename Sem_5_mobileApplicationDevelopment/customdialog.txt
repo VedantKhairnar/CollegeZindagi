@@ -1,0 +1,172 @@
+-------xml-----------
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="match_parent" android:layout_width="match_parent">
+
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="show"
+      android:id="@+id/b1"/>
+</RelativeLayout>
+
+---------mainactivity----------
+
+package com.example.customdialog;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+Button b1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        b1=findViewById(R.id.b1);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);
+                View view1=getLayoutInflater().inflate(R.layout.login,null);
+              //  EditText e1= (EditText) view1.findViewById(R.id.e1);
+                //EditText e2= (EditText) view1.findViewById(R.id.e2);
+                Button b1 = (Button) view1.findViewById(R.id.b1);
+                Button b2 = (Button) view1.findViewById(R.id.b2);
+                b1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(MainActivity.this,"sign in success",Toast.LENGTH_LONG).show();
+                    }
+                });
+                b2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(MainActivity.this,"canceled",Toast.LENGTH_LONG).show();
+                    }
+                });
+builder.setView(view1);
+AlertDialog alert = builder.create();
+alert.show();
+            }
+        });
+    }
+}
+
+----------login---------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="false"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="0dp"
+
+        android:width="100dp"
+        android:height="25dp"
+        android:text="Username"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/t2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_below="@+id/t1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="false"
+
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="38dp"
+        android:width="100dp"
+        android:height="25dp"
+        android:text="Password"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="false"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="340dp"
+        android:layout_toEndOf="@+id/t1"
+        android:layout_toRightOf="@+id/t1"
+        android:width="200dp"
+        android:hint="enter username"
+        android:id="@+id/e1"/>
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="false"
+        android:layout_marginStart="31dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="400dp"
+        android:layout_toEndOf="@+id/t2"
+        android:layout_toRightOf="@+id/t2"
+        android:width="200dp"
+        android:hint="enter password"
+        android:id="@+id/e2"/>
+
+    <Button
+        android:id="@+id/b2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:layout_marginRight="200dp"
+        android:width="300dp"
+
+        android:shadowColor="#E91E63"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="500dp"
+        android:width="400dp"
+        android:shadowColor="#E91E63"
+        android:text="Sign in" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+
+
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="100dp"
+        android:width="300dp"
+        android:text="Android APP"
+        android:textAllCaps="true"
+        android:textColor="#E91E63"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

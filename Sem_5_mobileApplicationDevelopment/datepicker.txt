@@ -1,0 +1,74 @@
+------activitymain----------
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <DatePicker
+        android:id="@+id/simpleDatePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#150"
+        android:datePickerMode="spinner" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/simpleDatePicker"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="#150"
+        android:text="SUBMIT"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</RelativeLayout>
+
+
+----------mainactivity---------
+
+package com.example.dtae;
+
+
+
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    DatePicker simpleDatePicker;
+    Button submit;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // initiate the date picker and a button
+        simpleDatePicker = (DatePicker) findViewById(R.id.simpleDatePicker);
+        submit = (Button) findViewById(R.id.submitButton);
+        // perform click event on submit button
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get the values for day of month , month and year from a date picker
+                String day = "Day = " + simpleDatePicker.getDayOfMonth();
+                String month = "Month = " + (simpleDatePicker.getMonth() + 1);
+                String year = "Year = " + simpleDatePicker.getYear();
+                // display the values by using a toast
+                Toast.makeText(getApplicationContext(), day + "\n" + month + "\n" + year, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+
+}

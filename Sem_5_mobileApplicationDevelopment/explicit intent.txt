@@ -1,0 +1,136 @@
+------------activityone--------------------
+
+<?xml version="1.0" encoding="utf-8"?>  
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:app="http://schemas.android.com/apk/res-auto"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    tools:context="example.javatpoint.com.explicitintent.FirstActivity">  
+  
+    <TextView  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_marginEnd="8dp"  
+        android:layout_marginStart="8dp"  
+        android:layout_marginTop="8dp"  
+        android:text="First Activity"  
+        app:layout_constraintBottom_toBottomOf="parent"  
+        app:layout_constraintEnd_toEndOf="parent"  
+        app:layout_constraintHorizontal_bias="0.454"  
+        app:layout_constraintLeft_toLeftOf="parent"  
+        app:layout_constraintRight_toRightOf="parent"  
+        app:layout_constraintStart_toStartOf="parent"  
+        app:layout_constraintTop_toTopOf="parent"  
+        app:layout_constraintVertical_bias="0.06" />  
+  
+    <Button  
+        android:id="@+id/button"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_marginEnd="8dp"  
+        android:layout_marginStart="8dp"  
+        android:layout_marginTop="392dp"  
+        android:onClick="callSecondActivity"  
+        android:text="Call second activity"  
+        app:layout_constraintEnd_toEndOf="parent"  
+        app:layout_constraintStart_toStartOf="parent"  
+        app:layout_constraintTop_toTopOf="parent" />  
+  
+</android.support.constraint.ConstraintLayout>
+
+-------------activitytwo-----------
+
+<?xml version="1.0" encoding="utf-8"?>  
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:app="http://schemas.android.com/apk/res-auto"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    tools:context="example.javatpoint.com.explicitintent.SecondActivity">  
+  
+    <TextView  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_marginEnd="8dp"  
+        android:layout_marginStart="8dp"  
+        android:layout_marginTop="8dp"  
+        android:text="Second Activity"  
+        app:layout_constraintBottom_toBottomOf="parent"  
+        app:layout_constraintEnd_toEndOf="parent"  
+        app:layout_constraintHorizontal_bias="0.454"  
+        app:layout_constraintLeft_toLeftOf="parent"  
+        app:layout_constraintRight_toRightOf="parent"  
+        app:layout_constraintStart_toStartOf="parent"  
+        app:layout_constraintTop_toTopOf="parent"  
+        app:layout_constraintVertical_bias="0.06" />  
+  
+    <Button  
+        android:id="@+id/button"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_marginEnd="8dp"  
+        android:layout_marginStart="8dp"  
+        android:layout_marginTop="392dp"  
+        android:onClick="callFirstActivity"  
+        android:text="Call first activity"  
+        app:layout_constraintEnd_toEndOf="parent"  
+        app:layout_constraintStart_toStartOf="parent"  
+        app:layout_constraintTop_toTopOf="parent" />  
+</android.support.constraint.ConstraintLayout> 
+
+--------mainactivitytwo------------
+
+package example.javatpoint.com.explicitintent;  
+  
+import android.content.Intent;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.Toast;  
+  
+public class SecondActivity extends AppCompatActivity {  
+  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_second);  
+        Bundle extras = getIntent().getExtras();  
+        String value1 = extras.getString("Value1");  
+        String value2 = extras.getString("Value2");  
+        Toast.makeText(getApplicationContext(),"Values are:\n First value: "+value1+  
+                "\n Second Value: "+value2, Toast.LENGTH_LONG).show();  
+    }  
+    public void callFirstActivity(View view){  
+        Intent i = new Intent(getApplicationContext(), FirstActivity.class);  
+        startActivity(i);  
+    }  
+  
+}     
+
+----------mainactivityone--------
+
+package example.javatpoint.com.explicitintent;  
+  
+import android.content.Intent;  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+  
+public class FirstActivity extends AppCompatActivity {  
+  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_first);  
+    }  
+    public void callSecondActivity(View view){  
+        Intent i = new Intent(getApplicationContext(), SecondActivity.class);  
+        i.putExtra("Value1", "Android By Javatpoint");  
+        i.putExtra("Value2", "Simple Tutorial");  
+        // Set the request code to any code you like, you can identify the  
+        // callback via this code  
+        startActivity(i);  
+    }  
+  
+}  
