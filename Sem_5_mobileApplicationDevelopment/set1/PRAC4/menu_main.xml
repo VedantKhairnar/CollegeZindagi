@@ -1,0 +1,66 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.prac4.MainActivity">
+
+    <item
+        android:id="@+id/ref"
+        android:orderInCategory="100"
+        android:title="refresh"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_redo_solid"/>
+    <item
+        android:id="@+id/as"
+        android:orderInCategory="100"
+        android:title="About Us"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_info_circle_solid"/>
+    <item
+        android:id="@+id/cart"
+        android:orderInCategory="100"
+        android:title="Cart"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_shopping_cart_solid"/>
+    <item
+        android:id="@+id/cl"
+        android:orderInCategory="100"
+        android:title="Clothes"
+        app:showAsAction="never" >
+
+        <menu>
+            <item
+                android:id="@+id/cl1"
+                android:orderInCategory="100"
+                android:title="Mens Wear"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/cl2"
+                android:orderInCategory="100"
+                android:title="Womens Wear"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/cl3"
+                android:orderInCategory="100"
+                android:title="Kids Wear"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/sh"
+        android:orderInCategory="100"
+        android:title="Shoes"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/eg"
+        android:orderInCategory="100"
+        android:title="Electronic Gadgets"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mob"
+        android:orderInCategory="100"
+        android:title="Mobiles"
+        app:showAsAction="never" />
+
+</menu>

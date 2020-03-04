@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Clothes">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tl">
+
+                <TableRow>
+                    <Button
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
+                        android:background="@drawable/cl1"
+                        android:layout_weight="1"
+                        />
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sp1"
+                        android:layout_weight="1"/>
+
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_weight="1"
+                        android:text="ADD to cart"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/clb1"/>
+                </TableRow>
+
+                <TableRow>
+                    <Button
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
+                        android:background="@drawable/cl2"
+                        android:layout_weight="1"
+                        />
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sp2"
+                        android:layout_weight="1"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_weight="1"
+                        android:text="ADD to cart"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/clb2"/>
+                </TableRow>
+
+                <TableRow>
+                    <Button
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
+                        android:background="@drawable/cl3"
+                        android:layout_weight="1"
+                        />
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sp3"
+                        android:layout_weight="1"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_weight="1"
+                        android:text="ADD to cart"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/clb3"/>
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

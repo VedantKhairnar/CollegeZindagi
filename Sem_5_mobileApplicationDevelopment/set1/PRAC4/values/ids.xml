@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="mob" type="id" />
+    <item name="eg" type="id" />
+    <item name="sh" type="id" />
+    <item name="cl1" type="id" />
+    <item name="cl2" type="id" />
+    <item name="cl3" type="id" />
+    <item name="ref" type="id" />
+    <item name="as" type="id" />
+    <item name="cart" type="id" />
+    <item name="cl" type="id" />
+</resources>
