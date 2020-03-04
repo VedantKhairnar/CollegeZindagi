@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+void main()
+{
+ char m[100],key[100];
+ int mlen,klen,i,j,k=-1;
+ printf("Enter the msg:\n");
+ scanf("%s",m);
+ printf("Enter the key:\n");
+ scanf("%s",key);
+ mlen=strlen(m);
+ klen=strlen(key);
+ int arr[klen],finarr[klen],rlen=(mlen/klen),ind[klen];
+ char matrix[mlen][klen],ematrix[rlen][klen];
+
+
+ for(i=0;i<=rlen;i++)
+ {
+ 	for(j=0;j<klen;j++)
+ 	{
+ 		k++;
+ 		matrix[i][j]=m[k];
+		printf("%c\t",matrix[i][j]);
+ 	}
+	printf("\n");
+ }
+ printf("\n");
+ int l=0;
+ for(i='A';i<='z';i++)
+ {
+ 	for(j=0;j<klen;j++)
+ 	{
+ 		if(key[j]==i)
+ 		{
+ 			finarr[l]=j;
+ 		    l++;
+		}
+	}
+ }
+
+ printf("\nEncrypted message:\n");
+ for(i=0;i<klen;i++)
+ {
+ 	int x1=finarr[i];
+ 	for(j=0;j<=rlen;j++)
+ 	{
+ 		ematrix[i][j]=matrix[j][x1];
+ 		printf("%c",ematrix[i][j]);
+    }
+    printf("\n");
+ }
+ printf("\nDecrypted message:\n");
+for(i=0;i<klen;i++)
+{
+	for(j=0;j<klen;j++)
+	{
+		if(finarr[j]==i)
+		{
+			ind[i]=j;
+		}
+    }
+}
+
+for(i=0;i<=rlen;i++)
+{
+	for(j=0;j<klen;j++)
+	{
+		printf("%c",ematrix[ind[j]][i]);
+	}
+}
+}
+
