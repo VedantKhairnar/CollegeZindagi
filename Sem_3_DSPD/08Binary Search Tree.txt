@@ -1,0 +1,177 @@
+/* My BST
+             48
+           /    \
+          35     72
+         /  \    /  \
+       18   40  69   84 */
+
+#include<stdio.h>
+#include<stdlib.h>
+#include "rvheader.h"
+
+struct node* createNode( int value)
+{
+    struct node* newNode = malloc(sizeof(struct node));
+    newNode->data = value;
+    newNode->lnext = NULL;
+    newNode->rnext = NULL;
+
+    return newNode;
+}
+
+struct node* insert(struct node* root, int data)
+{
+    if (root == NULL)
+    return createNode(data);
+
+    if (data < root->data)
+        root->lnext  = insert(root->lnext, data);
+    else if (data > root->data)
+        root->rnext = insert(root->rnext, data);
+
+    return root;
+}
+
+struct node* findSmallestNode(struct node* root)
+{
+    struct node* current = root;
+    while(current->lnext!=NULL)
+    {
+        current=current->lnext;
+    }
+    return current;
+}
+
+struct node* deletion(struct node* root, int value)
+{
+    //base case
+    if(root == NULL)
+    {
+        printf("\nValue not found\n");
+    }
+    //if value is smaller than root, travel to left
+    else if(value < root->data)
+    {
+       root->lnext = deletion(root->lnext,value);
+    }
+    //if value is greater than root, travel to right
+    else if(value > root->data)
+    {
+        root->rnext=deletion(root->rnext,value);
+    }
+    //if value is same as root's value
+    else
+    {
+        //node with 1 or 0 child
+        if(root->lnext==NULL)
+        {
+            struct node *temp=root->rnext;
+            free(root);
+            return temp;
+        }
+        else if(root->rnext==NULL)
+        {
+          struct node *temp=root->lnext;
+          free(root);
+          return temp;
+        }
+        else
+        {
+        struct node *temp = findSmallestNode(root->rnext);
+        root->data=temp->data;
+        root->rnext=deletion(root->rnext,temp->data);
+        return root;
+        }
+}
+    return root;
+}
+void printGivenLevel(struct node* root, int level)
+{
+    if (root == NULL)
+        return;
+    if (level == 1)
+        printf("%d ", root->data);
+    else if (level > 1)
+    {
+        printGivenLevel(root->lnext, level-1);
+        printGivenLevel(root->rnext, level-1);
+    }
+}
+
+void printLevelOrder(struct node* root)
+{
+    int h = depth(root);
+    int i;
+    for (i=1; i<=h+1; i++)
+        printGivenLevel(root,i);
+}
+
+int main()
+{
+    int option1,option2,data,value;
+    struct node *root = NULL;
+ do{
+  printf("Enter your choice:\n 1.Insertion of a node\n 2.Deletion of a node with specific value\n 3.Level order traversal\n 4.Traversal\n 5.Total internal nodes\n 6.Height\n 7.Exit\n");
+  scanf("%d",&option1);
+  switch(option1)
+  {
+  case 1: printf("\nEnter data to be inserted\n");
+          scanf("%d",&data);
+          root=insert(root,data);
+          break;
+  case 2: if(root == NULL)
+          {
+            printf("Tree is empty\n");
+          }
+          else
+          {
+          printf("\nEnter element to be deleted:\n");
+          scanf("%d",&value);
+          deletion(root,value);
+          }
+          break;
+  case 3: printLevelOrder(root);
+          break;
+  case 4: printf("\nChoose: 1.Inorder  2.Postorder  3.Preorder\n");
+         scanf("%d",&option2);
+         if(option2==1)
+         {
+          if(root==NULL)
+          {
+             printf("\nTree is empty\n");
+          }
+          else
+         inorder(root);
+         }
+         else if(option2==2)
+         {
+        if(root==NULL)
+          {
+             printf("\nTree is empty\n");
+          }
+          else
+            postorder(root);
+         }
+         else if(option2==3)
+         {
+             if(root==NULL)
+             {
+                 printf("\nTree is empty\n");
+             }
+             else
+                preorder(root);
+         }
+         break;
+  case 5:count(root);
+         printf("\nTotal number of internal nodes in the Binary tree is %d\n",count(root));
+         break;
+  case 6:depth(root);
+         printf("\nDepth of the tree is: %d\n", depth(root));
+         break;
+  case 7:exit(0);
+         break;
+  }
+   }while(option1!=7);
+
+    return 0;
+}

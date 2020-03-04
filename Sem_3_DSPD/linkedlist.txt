@@ -1,0 +1,323 @@
+//LINKED LIST
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+int data;
+struct node *next;
+};
+struct node *START=NULL;
+struct node *HOLD=NULL;
+
+void insert_beg(int);
+void insert_end(int);
+void insert_pos(int,int);
+void delete_beg();
+void delete_end();
+void delete_pos(int);
+int isEmpty();
+void traversal();
+void searching(int);
+void sorting();
+void merging();
+void reverselist();
+
+int main()
+{
+    int item,pos;
+    int option;
+    do{
+    printf("Enter your choice:\n");
+    printf("1.Insertion at beginning   2.Insertion at end     3.Insertion in between\n4.Deletion from beginning  5. Deletion from end.  ");
+    printf("6.Deletion from a position\n7.Searching  8.Traversing  9.Sorting  10.Merging  11.Reverse List  12.Exit\n");
+    scanf("%d",&option);
+    switch(option)
+    {
+        case 1:printf("\nEnter element to be inserted: ");
+               scanf("%d",&item);
+               insert_beg(item);
+               break;
+        case 2:printf("\nEnter element to be inserted: ");
+               scanf("%d",&item);
+               insert_end(item);
+               break;
+        case 3:printf("\nEnter element to be inserted: ");
+               scanf("%d",&item);
+               printf("Enter position for insertion: ");
+               scanf("%d",&pos);
+               insert_pos(item,pos);
+               break;
+        case 4:if(isEmpty()==1)
+               break;
+               else
+               delete_beg();
+               break;
+        case 5:if(isEmpty()==1)
+               break;
+               else
+               delete_end();
+               break;
+        case 6:if(isEmpty()==1)
+               break;
+               else
+               {
+               delete_pos(item);
+               }
+               break;
+        case 7:printf("Enter element to be searched\n");
+               scanf("%d",&item);
+               searching(item);
+               break;
+        case 8:traversal();
+               break;
+        case 9:sorting();
+               break;
+        case 10: merging();
+               break;
+        case 11: reverselist();
+               break;
+        case 12:exit(0);
+               break;
+    }
+    }while(option!=12);
+    return 0;
+}
+
+void insert_beg(int item)
+{
+struct node *q = (struct node*)malloc(sizeof(struct node));
+q->data=item;
+if(START==NULL)
+{
+q->next=NULL;
+}
+else
+{
+q->next=START;
+}
+START=q;
+}
+
+void insert_end(int item)
+{
+struct node *TEMP;
+struct node *q = (struct node*)malloc(sizeof(struct node));
+q->data=item;
+q->next=NULL;
+if(START == NULL)
+{
+    START = q;
+}
+else
+{
+    TEMP = START;
+    while((TEMP->next)!=NULL)
+    {
+        TEMP=TEMP->next;
+    }
+    TEMP->next=q;
+}
+}
+
+void insert_pos(int item,int pos)
+{
+struct node *q = (struct node*)malloc(sizeof(struct node));
+struct node *TEMP=START;
+int k=0;
+while(k<pos-1)
+{
+    TEMP=TEMP->next;
+    if(TEMP==NULL)
+    {
+        printf("\nNode in the list is less than position\n");
+        exit(0);
+    }
+    k++;
+}
+q->data=item;
+q->next=TEMP->next;
+TEMP->next=q;
+}
+
+void delete_beg()
+{
+    struct node *TEMP=NULL;
+    TEMP = START;
+    printf("Deleted item is: %d\n", TEMP->data);
+    START = START->next;
+    free(TEMP);
+}
+
+void delete_end()
+{
+    struct node *TEMP=START;
+    struct node *HOLD=START;
+     while((TEMP->next)!=NULL)
+    {
+    HOLD=TEMP;
+    TEMP=TEMP->next;
+    }
+    printf("\nDeleted item is: %d\n", TEMP->data);
+    HOLD->next = NULL;
+    free(TEMP);
+}
+
+void delete_pos(int item)
+{
+    int p,i;
+    struct node *temp=START;
+    printf("enter position to delete\n");
+    scanf("%d",&p);
+    if(p==0)
+    {
+        START=temp->next;
+        printf("\nDeleted element is: %d\n",temp->data);
+    }
+    else
+    {
+    for(i=0;i<p-1;i++)
+    {
+        temp=temp->next;
+    }
+    printf("\nDeleted element is: %d\n",temp->next->data);
+    temp->next=((temp->next)->next);
+    }
+}
+
+int isEmpty()
+{
+    if(START == NULL)
+    {
+      printf("\nList is empty\n");
+        return 1;
+    }
+    else
+    return 0;
+}
+
+void traversal()
+{
+   struct node *TEMP=START;
+   printf("\nYour list is:\n");
+   while(TEMP!=NULL)
+   {
+       printf("%d\t", TEMP->data);
+       TEMP=TEMP->next;
+   }
+   printf("\n");
+   if(START == NULL)
+    {
+        printf("List is empty\n");
+    }
+}
+
+void searching(int item)
+{
+struct node *TEMP=START;
+int POS=0;
+while(TEMP != NULL)
+{
+    if(TEMP->data==item)
+    {
+      printf("\nDATA FOUND AT POSITION: %d",POS);
+      printf("\n");
+      break;
+    }
+    TEMP = TEMP->next;
+    POS++;
+}
+if(TEMP==NULL)
+{
+    printf("\nDATA NOT FOUND\n");
+}
+}
+
+void sorting()
+{
+struct node *TEMP=NULL;
+struct node *HOLD=START;
+int count=0,i=0,k;
+while(HOLD!=NULL)
+{
+    HOLD = HOLD->next;
+    count++;
+}
+while(i<count-1)
+{
+TEMP=START;
+while((TEMP->next)!=NULL)
+{
+    if((TEMP->data)>(TEMP->next->data))
+    {
+        k= TEMP->data;
+        TEMP->data = TEMP->next->data;
+        TEMP->next->data=k;
+    }
+    TEMP=TEMP->next;
+}
+i++;
+}
+}
+
+void merging()
+{
+    int p,item;
+    struct node *TEMP1;
+    printf("Enter number of elements is second linked list\n");
+    scanf("%d",&p);
+    printf("Enter elements\n");
+    for(int i=0; i<p; i++)
+    {
+struct node *q = (struct node*)malloc(sizeof(struct node));
+scanf("%d",&item);
+q->data=item;
+if(HOLD==NULL)
+{
+q->next=NULL;
+}
+else
+{
+q->next=HOLD;
+}
+HOLD=q;
+}
+    if(HOLD == NULL)
+    {
+        printf("List is empty");
+        exit(0);
+    }
+   TEMP1=HOLD;
+   printf("\nYour Second list is:\n");
+   while(TEMP1!=NULL)
+   {
+       printf("%d\t", TEMP1->data);
+       TEMP1=TEMP1->next;
+   }
+   printf("\n");
+   printf("Initially ");
+   traversal();
+TEMP1=START;
+while(TEMP1->next!=NULL)
+{
+    TEMP1 = TEMP1->next;
+}
+TEMP1->next = HOLD;
+traversal();
+}
+
+void reverselist()
+{
+    struct node *CURRENT,*PREV,*NEXT;
+    CURRENT = START;
+    PREV = NULL;
+    while(CURRENT!=NULL)
+    {
+        NEXT = CURRENT->next;
+        CURRENT->next=PREV;
+        PREV=CURRENT;
+        CURRENT=NEXT;
+    }
+    START=PREV;
+    printf("\nList is reversed- ");
+    traversal();
+}

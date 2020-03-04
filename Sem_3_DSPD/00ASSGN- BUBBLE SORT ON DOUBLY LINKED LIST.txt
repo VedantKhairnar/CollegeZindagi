@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+int arr[100];
+//structure of a node
+struct node {
+int data;
+struct node* prev;
+struct node* next;
+};
+
+void insertAtTheBegin(struct node **start_ref, int data)
+{
+struct node *ptr1 = (struct node*)malloc(sizeof(struct node*));
+ptr1->data = data;
+ptr1 -> next = *start_ref;
+if (*start_ref != NULL)
+(*start_ref)->prev = ptr1;
+*start_ref = ptr1;
+}
+
+void printList(struct node *start)
+{
+struct node *temp = start;
+printf("\n");
+while (temp!=NULL)
+{
+printf("%d ",temp->data);
+temp = temp->next;
+}
+}
+
+void bubbleSort(struct node *start)
+{
+int swapped,temp;
+struct node *ptr1;
+struct node *lptr = NULL;
+
+if (start == NULL)
+{
+printf("\nList is empty\n");
+return;
+}
+do
+{
+swapped = 0;
+ptr1 = start;
+
+while (ptr1->next != NULL)
+{
+if (ptr1->data > ptr1->next->data)
+{
+temp = ptr1-> data;
+ptr1-> data = ptr1->next->data;
+ptr1->next->data = temp;
+swapped = 1;
+}
+ptr1 = ptr1->next;
+}
+ ptr1=NULL;
+}
+while(swapped!=0);
+}
+
+int main()
+{
+int i,n;
+struct node *start = NULL;
+printf("enter the no of elements");
+scanf("%d",&n);
+printf("Enter elements\n");
+for (i=0; i<n; i++)
+{
+scanf("%d",&arr[i]);
+insertAtTheBegin(&start, arr[i]);
+}
+printf("\n Linked list before sorting ");
+printList(start);
+bubbleSort(start);
+printf("\n Linked list after sorting ");
+printList(start);
+    return 0;
+}

@@ -1,0 +1,149 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+void conversion(char A[]);
+void push(char*,char,int*);
+void pop();
+int precedence(char);
+void display();
+void evaluate(char*);
+void cal(char);
+int power(int,int);
+char toppop();
+char s[100],post[100];
+int top1=-1,top2=-1;
+
+void main()
+{
+  char A[100];
+  printf("Enter a infix expression ::");
+  gets(A);
+  conversion(A);
+  display();
+  evaluate(A);
+  printf("\nAnswer after evaluating postfix expression :: %d",s[top2]-48);
+}
+
+
+void push(char *B,char ch,int *top)
+{
+ (*top)++;
+ B[(*top)]=ch;
+}
+void pop()
+{
+ char el;
+ el=s[top2];
+ push(post,el,&top1);
+ top2--;
+}
+int precedence(char ch)
+{
+ switch(ch)
+ {
+  case '^': return (5);
+  case '/': return (4);
+  case '*': return (4);
+  case '+': return (3);
+  case '-': return (3);
+  default: return (0);
+ }
+}
+void display()
+{
+int i;
+printf("\nPostfix expression ::");
+printf("%s",post);
+}
+char toppop()
+{
+return(s[top2--]);
+}
+void cal(char ch)
+{
+ int a,b,ans;
+ char c;
+ a=toppop();
+ b=toppop();
+ a=a-48;
+ b=b-48;
+ switch(ch)
+ {
+  case '^': ans=power(b,a);
+	    break;
+  case '*': ans=a*b;
+	     break;
+  case '/': ans=b/a;
+	    break;
+  case '+': ans=a+b;
+	    break;
+  case '-': ans=b-a;
+	    break;
+ }
+ ans=ans+48;
+ c=(char)(ans);
+ push(s,c,&top2);
+}
+int power(int x,int y)
+{
+ int r,i;
+ for(i=0,r=1;i<y;++i)
+  r=r*x;
+ return r;
+}
+void evaluate(char A[])
+{
+ int i;
+ for(i=0;i<=top1;++i)
+ {
+  if(isalpha(post[i]))
+  {
+   printf("\nAfter evaluation :: %s",A);
+   exit(0);
+  }
+  else
+  {
+   if(isdigit(post[i]))
+    push(s,post[i],&top2);
+   else
+    cal(post[i]);
+  }
+ }
+}
+
+void conversion(char A[])
+{
+ int i,x,ro,so;
+ for(i=0;A[i]!='\0';++i)
+ {
+  x=isalnum(A[i]);
+  if(x)
+  push(post,A[i],&top1);
+  else if(A[i]=='(')
+  push(s,A[i],&top2);
+  else if(A[i]==')')
+  {
+   while(s[top2]!='(')
+   pop();
+   top2--;
+  }
+  else
+  {
+   ro=precedence(A[i]);
+   if(top2==-1)
+   push(s,A[i],&top2);
+   else
+   {
+   do
+   {
+    so=precedence(s[top2]);
+    if(so>=ro)
+    pop();
+   }while(so>=ro);
+   push(s,A[i],&top2);
+   }
+  }
+ }
+ while(top2>=0)
+  pop();
+}

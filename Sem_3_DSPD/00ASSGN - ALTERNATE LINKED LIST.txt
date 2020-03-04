@@ -1,0 +1,188 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node display(struct node*);
+struct node alternate_odd(struct node*);
+struct node alternate_even(struct node*);
+
+struct node *start=NULL,*start1=NULL,*start2=NULL,*temp,*temp1,*temp2,*hold,*hold1;
+int n;
+float i;
+
+//to create a node
+struct node
+{
+int data;
+struct node *next;
+};
+struct node *newnode,*newnode1,*newnode2;
+
+//to create a linked list
+void main()
+{
+int data;
+clrscr();
+//insert element at end
+printf("enter the no of elements:");
+scanf("%d",&n);
+printf("enter an element\n");
+for(i=0;i<n;i++)
+{
+newnode=(struct node*) malloc(sizeof (struct node));
+scanf("%d",&data);
+newnode->data=data;
+newnode->next=NULL;
+
+if(start==NULL)
+{
+start=newnode;
+}
+else
+temp=start;
+while(temp->next!=NULL)
+{ temp=temp->next;
+}
+temp->next=newnode;
+}
+printf("\nthe elements in linked list are:\n");
+display(start);
+printf("\nthe elements in odd alternate linked list are:\n");
+alternate_odd(start);
+printf("\nthe elements in even alternate linked list are:\n");
+alternate_even(start);
+getch();
+}
+
+
+//to display a linked list
+struct node display(struct node *hold)
+{
+while(hold!=NULL)
+{
+printf("%d->",hold->data);
+hold=hold->next;
+}
+printf("NULL\n");
+}
+
+
+struct node alternate_odd(struct node *hold1)
+{
+if(n%2==0)
+{
+while(hold1!=NULL)
+{
+newnode1=(struct node*) malloc(sizeof (struct node));
+newnode1->data =hold1->data;
+newnode1->next=NULL;
+hold1=hold1->next;
+hold1=hold1->next;
+if(start1== NULL)
+start1=newnode1;
+else
+{
+temp1=start1;
+while(temp1->next!=NULL)
+{
+temp1=temp1->next;
+}
+temp1->next=newnode1;
+}
+}
+
+}
+
+else
+{
+while(hold1->next!=NULL)
+{ newnode1=(struct node*) malloc(sizeof (struct node));
+newnode1->data =hold1->data;
+newnode1->next=NULL;
+hold1=hold1->next;
+hold1=hold1->next;
+if(start1== NULL)
+start1=newnode1;
+else
+{
+temp1=start1;
+while(temp1->next!=NULL)
+{
+temp1=temp1->next;
+}
+temp1->next=newnode1;
+}}
+temp1=start1;
+newnode1=(struct node*)malloc(sizeof (struct node));
+newnode1->data=hold1->data;
+while(temp1->next!=NULL)
+{temp1=temp1->next;
+}
+newnode->next=NULL;
+temp1->next=newnode1;
+}
+display(start1);
+}
+
+struct node alternate_even(struct node *hold2)
+{
+hold2=hold2->next;
+if(n%2==0)
+{
+while(hold2->next!=NULL)
+{
+newnode2=(struct node*) malloc(sizeof (struct node));
+newnode2->data =hold2->data;
+newnode2->next=NULL;
+hold2=hold2->next;
+hold2=hold2->next;
+if(start2== NULL)
+start2=newnode2;
+else
+{
+temp2=start2;
+while(temp2->next!=NULL)
+{
+temp2=temp2->next;
+}
+temp2->next=newnode2;
+}
+}
+
+temp2=start2;
+newnode2=(struct node*)malloc(sizeof(struct node));
+newnode2->data=hold2->data;
+while(temp2->next!=NULL)
+{
+temp2=temp2->next;
+}
+newnode2->next=NULL;
+temp2->next=newnode2;
+}
+
+else
+{
+while(hold2!=NULL)
+{
+newnode2=(struct node*)malloc(sizeof(struct node));
+newnode2->data=hold2->data;
+newnode2->next=NULL;
+hold2=hold2->next;
+hold2=hold2->next;
+if(start2==NULL)
+{
+start2=newnode2;
+}
+else
+{
+temp2=start2;
+while(temp2->next!=NULL)
+{temp2=temp2->next;
+}
+temp2->next=newnode2;
+}
+}
+}
+display(start2);
+}
+
